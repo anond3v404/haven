@@ -13,5 +13,7 @@ WORKDIR /app
 # make persistent dirs
 RUN adduser -D -u 10001 app && mkdir -p /db /blossom /config && chown -R app:app /db /blossom /config
 COPY --from=build /out/haven /usr/local/bin/haven
+
 USER app
 EXPOSE 3355
+ENTRYPOINT ["haven"]
