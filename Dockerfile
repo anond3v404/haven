@@ -16,8 +16,10 @@ RUN adduser -D -u 10001 app && mkdir -p /db /blossom /config && chown -R app:app
 # Copy the compiled binary
 COPY --from=build /out/haven /usr/local/bin/haven
 
-# Copy the templates folder
+# Copy the templates folder and json files
 COPY --from=build /templates /templates
+COPY --from=build /relays_blastr.example.json /relays_blastr.json
+COPY --from=build /relays_import.example.json /relays_import.json
 
 USER app
 EXPOSE 3355
