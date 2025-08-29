@@ -12,7 +12,12 @@ RUN apk add --no-cache lmdb ca-certificates tzdata
 WORKDIR /
 # make persistent dirs
 RUN adduser -D -u 10001 app && mkdir -p /db /blossom /config && chown -R app:app /db /blossom /config
+
+# Copy the compiled binary
 COPY --from=build /out/haven /usr/local/bin/haven
+
+# Copy the templates folder
+COPY --from=build /templates /templates
 
 USER app
 EXPOSE 3355
