@@ -11,13 +11,7 @@ FROM alpine:3.20
 RUN apk add --no-cache lmdb ca-certificates tzdata
 WORKDIR /app
 # make persistent dirs
-RUN adduser -D -u 10001 app && mkdir -p /data /uploads /templates /config && chown -R app:app /data /uploads /templates /config
+RUN adduser -D -u 10001 app && mkdir -p /db /blossom /config && chown -R app:app /db /blossom /config
 COPY --from=build /out/haven /usr/local/bin/haven
 USER app
 EXPOSE 3355
-# Sensible defaults; Haven will still run if you omit these.
-ENV HAVEN_DATA_DIR=/data \
-    HAVEN_TEMPLATES_DIR=/templates \
-    HAVEN_UPLOADS_DIR=/uploads \
-    HAVEN_PORT=3355
-ENTRYPOINT ["haven"]
