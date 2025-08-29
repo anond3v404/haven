@@ -21,4 +21,4 @@ COPY --from=build /templates /templates
 
 USER app
 EXPOSE 3355
-CMD ["haven"]
+ENTRYPOINT ["sh", "-c", "haven $HAVEN_OPTS"]
