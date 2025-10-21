@@ -28,5 +28,5 @@ COPY --from=build /haven/relays_import.example.json /haven/relays_import.json
 # Expose Haven port
 EXPOSE 3355
 
-# Run Haven directly
-ENTRYPOINT ["./haven"]
+# Run as default user (root is fine since no persistent dirs enforced)
+ENTRYPOINT ["sh", "-c", "./haven $HAVEN_OPTS"]
